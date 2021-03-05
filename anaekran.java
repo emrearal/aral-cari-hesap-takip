@@ -43,10 +43,7 @@ public class anaekran implements ActionListener {
 	static JLabel baslik2;
 	static String selectedData ="",aranankelime="",varsayilansirketadi="",secilifirmaadi="",secilifirmalimit="";
 	
-	//static String sqluser="emrearal",sqlpass="7481418",sqlip="localhost:3306";       // Ubuntu Uzakmasaüstü localhost
-	//static String sqluser="emrearal",sqlpass="7481418",sqlip="10.0.0.200:3306";       // Asgard SQL yerel ağdan
-	//static String sqluser="emrearal",sqlpass="7481418",sqlip="78.188.198.222:3306";     // Asgard SQL Genel
-	static String sqluser="root",sqlpass="123456",sqlip="localhost:3306";         // Emre Laptop sql localhost
+	static String sqluser="root",sqlpass="123456",sqlip="localhost:3306";         // BaÄŸlanÄ±lacak MySql 5.7 server bilgileri
 	
 	static boolean eklebasildi=false,silebasildi=false,duzenlebasildi=false,gosterbasildi=false;
 	static int varsayilansirketkodu;
@@ -54,7 +51,7 @@ public class anaekran implements ActionListener {
 	public static void anametod() {
 		
 					
-		try{                                                        //Varsayılan firma  hangisi işaretlenmiş ?                                
+		try{                                                        //VarsayÃ½lan firma  hangisi iÃ¾aretlenmiÃ¾ ?                                
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(
 				   "jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -70,11 +67,11 @@ public class anaekran implements ActionListener {
 			
 			}catch(Exception e){ System.out.println(e);}  
 		
-		buttonekle = new JButton("     Cari Kart Ekle    ");                                     //Düğmeler 
+		buttonekle = new JButton("     Cari Kart Ekle    ");                                     //DÃ¼Ã°meler 
 		buttonekle.addActionListener(new anaekran());
 		buttonekle.setActionCommand(actions.buttonekle.name());
 		
-		buttonduzenle = new JButton("Cari Kart Düzenle");
+		buttonduzenle = new JButton("Cari Kart DÃ¼zenle");
 		buttonduzenle.addActionListener(new anaekran());
 		buttonduzenle.setActionCommand(actions.buttonduzenle.name());
 		
@@ -82,7 +79,7 @@ public class anaekran implements ActionListener {
 		buttonsil.addActionListener(new anaekran());
 		buttonsil.setActionCommand(actions.buttonsil.name());
 				
-		buttoncarihareketler = new JButton("C/H HAREKETLERİ");
+		buttoncarihareketler = new JButton("C/H HAREKETLERÃ");
 		buttoncarihareketler.addActionListener(new anaekran());
 		buttoncarihareketler.setActionCommand(actions.buttoncarihareketler.name());
 		
@@ -90,29 +87,29 @@ public class anaekran implements ActionListener {
 		buttoncaribul.addActionListener(new anaekran());
 		buttoncaribul.setActionCommand(actions.buttoncaribul.name());
 		
-		buttoncarigoster=new JButton ("Cari Kartı Göster");
+		buttoncarigoster=new JButton ("Cari KartÃ½ GÃ¶ster");
 		buttoncarigoster.addActionListener(new anaekran());
 		buttoncarigoster.setActionCommand(actions.buttoncarigoster.name());
 		
-		baslik2 = new JLabel("'Silme','Düzenleme','Cari Hesap Hareketleri'ni görmek için tablo üzerinde tıklayarak firma seçimi yapın" );
+		baslik2 = new JLabel("'Silme','DÃ¼zenleme','Cari Hesap Hareketleri'ni gÃ¶rmek iÃ§in tablo Ã¼zerinde tÃ½klayarak firma seÃ§imi yapÃ½n" );
 			
 		panel3=new JPanel();
 		panel4=new JPanel();
 		frame = new JFrame();
-		frame.setTitle("ARAL CARİ HESAP TAKİP PROGRAMI.     Varsayılan Şirketim :  "+varsayilansirketadi );
+		frame.setTitle("ARAL CARÃ HESAP TAKÃP PROGRAMI.     VarsayÃ½lan Ãirketim :  "+varsayilansirketadi );
 		
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
 		
-		menubar = new JMenuBar();                                 // Menü oluşturma
+		menubar = new JMenuBar();                                 // MenÃ¼ oluÃ¾turma
 		
-		firmalar = new JMenu("ŞİRKETLERİM"); 
+		firmalar = new JMenu("ÃÃRKETLERÃM"); 
         yedek = new JMenu("YEDEK"); 
-        araclar = new JMenu("ARAÇLAR");
+        araclar = new JMenu("ARAÃ‡LAR");
         yardim = new JMenu("YARDIM");
         raporlar= new JMenu("RAPORLAR");
 		
-		firmahesaplari=new JMenuItem("Şirketlerim");
+		firmahesaplari=new JMenuItem("Ãirketlerim");
 		firmahesaplari.addActionListener(new anaekran());
 		firmahesaplari.setActionCommand(actions.mitfirmahesaplari.name());
 		
@@ -132,28 +129,28 @@ public class anaekran implements ActionListener {
 		mizan.addActionListener(new anaekran());
 		mizan.setActionCommand(actions.mitmizan.name());
 		
-		hakkinda=new JMenuItem("Hakkında");
+		hakkinda=new JMenuItem("HakkÃ½nda");
 		hakkinda.addActionListener(new anaekran());
 		hakkinda.setActionCommand(actions.mithakkinda.name());
 		
-		yardimyardim=new JMenuItem("Yardım");
+		yardimyardim=new JMenuItem("YardÃ½m");
 		yardimyardim.addActionListener(new anaekran());
 		yardimyardim.setActionCommand(actions.mityardim.name());
 		
-		geriyukle=new JMenuItem("Geri Yükle");  // Henüz yapılandırılmadı. Devre dışı 
+		geriyukle=new JMenuItem("Geri YÃ¼kle");  // HenÃ¼z yapÃ½landÃ½rÃ½lmadÃ½. Devre dÃ½Ã¾Ã½ 
 		
-		alacaklar=new JMenuItem("Satıcı Faturaları Listesi");
+		alacaklar=new JMenuItem("SatÃ½cÃ½ FaturalarÃ½ Listesi");
 		alacaklar.addActionListener(new anaekran());
 		alacaklar.setActionCommand(actions.mitalacaklar.name());
 		
-		borclar=new JMenuItem("Alıcı Faturaları Listesi");
+		borclar=new JMenuItem("AlÃ½cÃ½ FaturalarÃ½ Listesi");
 		borclar.addActionListener(new anaekran());
 		borclar.setActionCommand(actions.mitborclar.name());
 		 
        menubar.add(firmalar);
        menubar.add(raporlar);
        menubar.add(araclar);
-       //menubar.add(yedek);    //  sadece localhost'ta çalışır. o yüzden şu anda kapattım.
+       //menubar.add(yedek);    //  sadece localhost'ta Ã§alÃ½Ã¾Ã½r. o yÃ¼zden Ã¾u anda kapattÃ½m.
        menubar.add(yardim);
      
        firmalar.add(firmahesaplari);
@@ -178,14 +175,14 @@ public class anaekran implements ActionListener {
 	   
 	   panel4.add(baslik2);
 	   
-	   String[] sutun = { "KOD","Firma Ünvanı","Şehir","Limit"};                      // Tablo oluşturma 
+	   String[] sutun = { "KOD","Firma ÃœnvanÃ½","Ãehir","Limit"};                      // Tablo oluÃ¾turma 
 		int cnk=0;
 	   
-	   if (!aranankelime.equals("")) {    // ARAMA MI YAPACAĞIZ YOKSA HEPSİNİ DÖKECEK MİYİZ ?
+	   if (!aranankelime.equals("")) {    // ARAMA MI YAPACAÃIZ YOKSA HEPSÃNÃ DÃ–KECEK MÃYÃZ ?
 		   
 		   // arama yapacaksak :
 		   try{                                              
-				Class.forName("com.mysql.jdbc.Driver");    // ARANAN SONUÇTAN KAÇ TANE VAR
+				Class.forName("com.mysql.jdbc.Driver");    // ARANAN SONUÃ‡TAN KAÃ‡ TANE VAR
 				Connection con=DriverManager.getConnection(
 						"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
 						
@@ -199,7 +196,7 @@ public class anaekran implements ActionListener {
 							
 							}catch(Exception e){ System.out.println(e);}  
 						
-						 String[][] satir= new String[cnk][4];     // sonuç sayısına göre array boyutlama
+						 String[][] satir= new String[cnk][4];     // sonuÃ§ sayÃ½sÃ½na gÃ¶re array boyutlama
 						 cnk=0;
 			
 				try{                                              
@@ -242,9 +239,9 @@ public class anaekran implements ActionListener {
 			    
 			    aranankelime="";
 		   
-	   } else {   // Birşey aranmıyorsa herşeyi ekrana bas
+	   } else {   // BirÃ¾ey aranmÃ½yorsa herÃ¾eyi ekrana bas
   
-		   	try{                                              // MYSQL Veri tabanının kaç satır olduğunu bulup array boyutlama
+		   	try{                                              // MYSQL Veri tabanÃ½nÃ½n kaÃ§ satÃ½r olduÃ°unu bulup array boyutlama
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -260,7 +257,7 @@ public class anaekran implements ActionListener {
 		     String[][] satir= new String[cnk][4];
 		     cnk=0;
 		
-		 	try{                                              //Veri tabanındakileri array'e aktarma
+		 	try{                                              //Veri tabanÃ½ndakileri array'e aktarma
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -282,10 +279,10 @@ public class anaekran implements ActionListener {
 		sp=new JScrollPane(tablo); 
 		sp.setPreferredSize(new Dimension(700, 350));
 		
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();   //Hücre içeriğini ortalama
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();   //HÃ¼cre iÃ§eriÃ°ini ortalama
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 		
-        tablo.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);   //Hücre genişliklei ayarlama
+        tablo.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);   //HÃ¼cre geniÃ¾liklei ayarlama
         tablo.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         tablo.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
         tablo.getColumnModel().getColumn(3).setCellRenderer(centerRenderer);
@@ -298,7 +295,7 @@ public class anaekran implements ActionListener {
 		
 	   }
 	    
-	 //İSTER ARAMA SONUCU İSTER TÜM LİSTE OLSUN BURADA OLUŞTURULAN TABLOYU BAS.
+	 //ÃSTER ARAMA SONUCU ÃSTER TÃœM LÃSTE OLSUN BURADA OLUÃTURULAN TABLOYU BAS.
 	   
 	    Container contentPane = frame.getContentPane();
 	  
@@ -311,13 +308,13 @@ public class anaekran implements ActionListener {
 	    
 	    frame.setVisible(true);
 	     
-	    ListSelectionModel cellSelectionModel = tablo.getSelectionModel();               // listeden seçileni dinleme kısmı
+	    ListSelectionModel cellSelectionModel = tablo.getSelectionModel();               // listeden seÃ§ileni dinleme kÃ½smÃ½
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
           public void valueChanged(ListSelectionEvent e) {
            
-        	  if(!e.getValueIsAdjusting())  {    						// bu IF iki defa yazmaması için konuldu. 
+        	  if(!e.getValueIsAdjusting())  {    						// bu IF iki defa yazmamasÃ½ iÃ§in konuldu. 
       
         		  int selectedRow     = tablo.getSelectedRow();
           		selectedData = (String) tablo.getValueAt(selectedRow,0 );
