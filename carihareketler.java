@@ -54,11 +54,11 @@ public class carihareketler implements ActionListener {
 		borc=0;
 		bakiye=0;
 		
-		    buttonekle = new JButton("   Hareket Ekle   ");                                     //D¸meler 
+		    buttonekle = new JButton("   Hareket Ekle   ");                                     //D√º√∞meler 
 			buttonekle.addActionListener(new carihareketler());
 			buttonekle.setActionCommand(actions.buttonekle.name());
 			
-			buttonduzenle = new JButton("Hareket D¸zenle");
+			buttonduzenle = new JButton("Hareket D√ºzenle");
 			buttonduzenle.addActionListener(new carihareketler());
 			buttonduzenle.setActionCommand(actions.buttonduzenle.name());
 			
@@ -83,10 +83,10 @@ public class carihareketler implements ActionListener {
 		panel3.add(buttonduzenle);
 		panel3.add(ekstreyazdir);
 		
-		String[] sutun = { "F›ﬁ NO","TAR›H","BOR«","ALACAK","F›ﬁ T›P›","EVRAK NO","A«IKLAMA"} ;                      // Tablo olu˛turma 
+		String[] sutun = { "F√ù√û NO","TAR√ùH","BOR√á","ALACAK","F√ù√û T√ùP√ù","EVRAK NO","A√áIKLAMA"} ;                      // Tablo olu√æturma 
 		int cnk=0;
 	
-		try{                                              // MYSQL Veri taban˝n˝n kaÁ sat˝r olduunu bulup array boyutlama
+		try{                                              // MYSQL Veri taban√Ωn√Ωn ka√ß sat√Ωr oldu√∞unu bulup array boyutlama
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -105,7 +105,7 @@ public class carihareketler implements ActionListener {
 		 
 		 cnk=0;
 		
-		try{                                              //Veri taban˝ndakileri array'e aktarma
+		try{                                              //Veri taban√Ωndakileri array'e aktarma
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -121,12 +121,12 @@ public class carihareketler implements ActionListener {
 				
 				String ilkyedi = rs.getString(5).substring(3,7);
 				String yedisonrasi = rs.getString(5).substring(7);
-				  if (ilkyedi.equals("borc")) {       // borÁ kayd˝ ise
+				  if (ilkyedi.equals("borc")) {       // bor√ß kayd√Ω ise
 					satir[cnk][2] = rs.getString(6); 
 					borc=borc+Double.parseDouble(rs.getString(6)); 
 					satir[cnk][3] = " ";
 				    }
-				  if (ilkyedi.equals("alac")) {      // alacak kayd˝ ise
+				  if (ilkyedi.equals("alac")) {      // alacak kayd√Ω ise
 					satir[cnk][2] =  " "; 
 					satir[cnk][3] =rs.getString(6);
 					alacak=alacak+Double.parseDouble(rs.getString(6)); 
@@ -165,22 +165,22 @@ public class carihareketler implements ActionListener {
 		columnModel.getColumn(5).setMaxWidth(150);
 		columnModel.getColumn(6).setMaxWidth(400);
 		
-		df = NumberFormat.getInstance(Locale.ENGLISH);      //bindelik ayrac˝ iÁin yeni format
+		df = NumberFormat.getInstance(Locale.ENGLISH);      //bindelik ayrac√Ω i√ßin yeni format
 		
 		bakiye= alacak-borc;
 	
-		txtborc=new JLabel("Toplam BorÁ: "+df.format(borc)+"   ");
+		txtborc=new JLabel("Toplam Bor√ß: "+df.format(borc)+"   ");
 		txtalacak=new JLabel("Toplam Alacak: "+df.format(alacak)+"   ");
 		if (borc-alacak>0) {
-			isaret=" BorÁlu";
+			isaret=" Bor√ßlu";
 		} else {
-			isaret=" Alacakl˝";
+			isaret=" Alacakl√Ω";
 		}
 		if (borc==alacak) {
-			isaret="S˝f˝r";
+			isaret="S√Ωf√Ωr";
 		}
 		bakiye=Math.abs(bakiye);
-		txtbakiye=new JLabel("*BAK›YE: "+df.format(bakiye)+isaret+"*");
+		txtbakiye=new JLabel("*BAK√ùYE: "+df.format(bakiye)+isaret+"*");
 		
 		panel5.add(txtborc);
 		panel5.add(txtalacak);
@@ -196,13 +196,13 @@ public class carihareketler implements ActionListener {
 	    frame.setLocationRelativeTo(null);
 	    frame.setVisible(true);
 	    
-	    ListSelectionModel cellSelectionModel = tablo.getSelectionModel();               // listeden seÁileni dinleme k˝sm˝
+	    ListSelectionModel cellSelectionModel = tablo.getSelectionModel();               // listeden se√ßileni dinleme k√Ωsm√Ω
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
           public void valueChanged(ListSelectionEvent e) {
            
-        	  if(!e.getValueIsAdjusting())  {    						// bu IF iki defa yazmamas˝ iÁin konuldu. 
+        	  if(!e.getValueIsAdjusting())  {    						// bu IF iki defa yazmamas√Ω i√ßin konuldu. 
       
         		  int selectedRow     = tablo.getSelectedRow();
           		selectedData = (String) tablo.getValueAt(selectedRow,0 );
@@ -253,13 +253,13 @@ public class carihareketler implements ActionListener {
 			kod="ODEME ALACAK";
 			break;
 			
-		case "ac˝borc":
+		case "ac√Ωborc":
 			carihareketdegistireklesil.data2="ACILIS";
 			carihareketdegistireklesil.data="BORC";
-			kod="ACILIS BORC ";
+			kod="ACILIS BORC";
 			break;
 			
-		case "ac˝alac":
+		case "ac√Ωalac":
 			carihareketdegistireklesil.data2="ACILIS";
 			carihareketdegistireklesil.data="ALACAK";
 			kod="ACILIS ALACAK";
