@@ -43,9 +43,6 @@ public class anaekran implements ActionListener {
 	static JLabel baslik2;
 	static String selectedData ="",aranankelime="",varsayilansirketadi="",secilifirmaadi="",secilifirmalimit="";
 	
-	//static String sqluser="emrearal",sqlpass="7481418",sqlip="localhost:3306";       // Ubuntu Uzakmasaüstü localhost
-	//static String sqluser="emrearal",sqlpass="7481418",sqlip="10.0.0.200:3306";       // Asgard SQL yerel ağdan
-	//static String sqluser="emrearal",sqlpass="7481418",sqlip="78.188.198.222:3306";     // Asgard SQL Genel
 	static String sqluser="root",sqlpass="123456",sqlip="localhost:3306";         // Emre Laptop sql localhost
 	
 	static boolean eklebasildi=false,silebasildi=false,duzenlebasildi=false,gosterbasildi=false;
