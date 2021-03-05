@@ -266,7 +266,7 @@ if (carihareketler.duzenlebasildi==true | carihareketler.silebasildi==true ) {
 	             }  
 	           
 	            	 label.setText("Fiş Tipi    :    "+data2+" "+data); 
-	             if (data2.equals("ODEME")) {
+	             if (data2.equals("ODEME") | data2.equals("ACILIS")) {
 	            	 jt8.setVisible(false);
 	            	 lb8.setVisible(false);
 	            	 }else {
@@ -416,8 +416,8 @@ private static void veriarama(String ekrankod) {
 		     
 		     String fistipi = carihareketler.sifrecoz(rs.getString(5).substring(0,7));
 		     label.setText("Fiş Tipi    :    "+fistipi);  
-		     
-		     if (fistipi.equals("ODEME ALACAK") |  fistipi.equals("ODEME BORC")) {
+		         if (fistipi.equals("ODEME ALACAK") |  fistipi.equals("ODEME BORC") | 
+		    		 fistipi.equals("ACILIS BORC") | fistipi.equals("ACILIS ALACAK")) {
 				 jt8.setVisible(false);
 				 lb8.setVisible(false);
 				 } 
