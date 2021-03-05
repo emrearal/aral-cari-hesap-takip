@@ -1,0 +1,135 @@
+1-)MySql Server 5.7 versiyonunu kurun. Önceki veya sonraki versiyonlarda komut paketleri hata verebilir.
+şifreyi 123456 olarak belirleyin. farklı bir şifre koyacaksanız kodu değiştirin. 
+kullanıcı adı olarak "root" dışında bir şey kullanacaksanız kodu değiştirin.
+
+2-)Sonra database'i oluşturun 
+
+CREATE DATABASE alverdefdb;
+
+3-) Oluşturduğumuz veritabanını türkçe karakterlere uygun hale getirelim 
+
+ALTER DATABASE alverdefdb CHARACTER SET utf8 COLLATE utf8_turkish_ci;
+
+4-) Tabloları oluşturalım ve ilk tabloların birinci saturlarının değerlerini girelim;
+
+önce 
+
+USE alverdefdb;
+
+sonra sırasıyla 
+
+create table firmalarim(
+   firmalarim_0kod INT NOT NULL AUTO_INCREMENT,
+   firmalarim_1unvan VARCHAR(100) NOT NULL,
+   firmalarim_2tel VARCHAR(100) ,
+   firmalarim_3adres VARCHAR(100) ,
+   firmalarim_4il VARCHAR(100) ,
+   firmalarim_5ilce VARCHAR(100) ,
+   firmalarim_6vd VARCHAR(100),
+   firmalarim_7vn VARCHAR(100) ,
+   firmalarim_8email VARCHAR(100) ,
+   firmalarim_9limit VARCHAR(100) ,
+   firmalarim_10varsay VARCHAR(100),
+   PRIMARY KEY ( firmalarim_0kod )
+);
+
+INSERT INTO firmalarim (
+   firmalarim_0kod,
+   firmalarim_1unvan,
+   firmalarim_2tel, 
+   firmalarim_3adres, 
+   firmalarim_4il,
+   firmalarim_5ilce,
+   firmalarim_6vd,
+   firmalarim_7vn,
+   firmalarim_8email,
+   firmalarim_9limit,
+   firmalarim_10varsay ) VALUES (
+    '1',
+    'asgard taş ve tic Ltd.',
+    '02128767061',
+    'Baris mah. 3. cad. 3/23',
+    'İstanbul',
+    'Beylikdüzü',
+    'Beylikdüzü',
+    '0860300750',
+    'emrea@asgard.com.tr',
+    '5000',
+    'Evet'  );
+
+create table carikartlari(
+   carikart_0kod INT NOT NULL AUTO_INCREMENT,
+   carikart_1unvan VARCHAR(100) NOT NULL,
+   carikart_2tel VARCHAR(100) ,
+   carikart_3adres VARCHAR(100),
+   carikart_4il VARCHAR(100) ,
+   carikart_5ilce VARCHAR(100) ,
+   carikart_6vd VARCHAR(100) ,
+   carikart_7vn VARCHAR(100) ,
+   carikart_8email VARCHAR(100) ,
+   carikart_9limit DOUBLE(20,2) ,
+   carikart_10kisi VARCHAR(100) ,
+   PRIMARY KEY ( carikart_0kod )
+);
+
+INSERT INTO carikartlari (
+   carikart_0kod,
+   carikart_1unvan,
+   carikart_2tel, 
+   carikart_3adres, 
+   carikart_4il,
+   carikart_5ilce,
+   carikart_6vd,
+   carikart_7vn,
+   carikart_8email,
+   carikart_9limit ,
+   carikart_10kisi ) VALUES (
+     '1',
+    'sinangil unları ticaret ltd',
+    '02325457844',
+    'Barış mah. 7. cad. 6/45',
+    'Muş',
+    'Merbent',
+    'Maltepe',
+    '145585470',
+    'emrec@asgard.com.tr',
+    '4000',
+    'Ayşe Sucu'  );
+
+create table fiskayitlari(
+   fisno INT NOT NULL AUTO_INCREMENT,
+   firmalarim_0kod INT,
+   carikart_0kod INT,
+   tarih DATE,
+   tip VARCHAR(100),
+   tutar DOUBLE(20,2),
+   aciklama VARCHAR(100) ,
+   kdv double(20,2) ,
+   PRIMARY KEY ( fisno ) );
+
+INSERT INTO fiskayitlari (
+   fisno,
+   firmalarim_0kod,
+   carikart_0kod, 
+   tarih, 
+   tip ,
+   tutar,
+   aciklama,
+   kdv ) VALUES (
+     '1',
+    '1',
+    '1',
+    '2021-02-25',
+    'fatborcDEV457821',
+    '236',
+    'Polonya nakliye bedeli',
+     '36' );
+
+create table notdefteri(
+   notlarim VARCHAR(400),
+   PRIMARY KEY ( notlarim )
+);
+
+INSERT INTO notdefteri (
+   notlarim ) VALUES ('Buraya not alabilirsiniz. veri tabanında saklanacaktır' );
+
