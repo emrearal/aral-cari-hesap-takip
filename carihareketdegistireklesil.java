@@ -38,16 +38,16 @@ public class carihareketdegistireklesil implements ActionListener {
 	
 public static void ekle() {
 	
-	yavru = new JDialog(anaekran.frame," Cari Hareket Ýþlemleri Ekraný",true); 
+	yavru = new JDialog(anaekran.frame," Cari Hareket Ä°ÅŸlemleri EkranÄ±",true); 
 	yavru.setResizable(false);
 
-	yavrudugme= new JButton("VAZGEÇ");
+	yavrudugme= new JButton("VAZGEÃ‡");
 	yavrudugme2 = new JButton("ONAY");
 	
 	baslik= new JLabel("");
 	baslik.setBounds(10,10,500,20);
 	
-	picker = new JXDatePicker();                        //Tarih Seçici
+	picker = new JXDatePicker();                        //Tarih SeÃ§ici
     if (carihareketler.eklebasildi==true) {
     	picker.setDate(Calendar.getInstance().getTime()); 	
     }	                
@@ -60,9 +60,9 @@ public static void ekle() {
 	    label.setBounds(25,170,300,40);  
 	    
 	    data2="FATURA"; data="BORC";
-	    label.setText("Fiþ Tipi    :    "+data2+" "+data); 
+	    label.setText("FiÅŸ Tipi    :    "+data2+" "+data); 
 	    
-	    b=new JButton("Seç");  
+	    b=new JButton("SeÃ§");  
 	    b.setBounds(250,50,75,75);  
 	    b.addActionListener(new carihareketdegistireklesil());
 		b.setActionCommand(evethayir.sec.name());
@@ -81,18 +81,17 @@ public static void ekle() {
 	      list2 = new JList<>(l2);
 	      list2.setSelectedIndex(0);
 	      list2.setBounds(50,50, 75,75);  
-	 
-		
+	 	
 	if (alverdef.carihareketler.eklebasildi==true) {
-		baslik.setText(anaekran.secilifirmaadi+" FÝRMASINA CARÝ HAREKET EKLE");
+		baslik.setText(anaekran.secilifirmaadi+" FÄ°RMASINA CARÄ° HAREKET EKLE");
 	}
 	
 	if (alverdef.carihareketler.duzenlebasildi==true) {
-		baslik.setText(anaekran.secilifirmaadi+" FÝRMASININ CARÝ HAREKETÝNÝ DÜZENLE");
+		baslik.setText(anaekran.secilifirmaadi+" FÄ°RMASININ CARÄ° HAREKETÄ°NÄ° DÃœZENLE");
 	}
 
 	if (alverdef.carihareketler.silebasildi==true) {
-		baslik.setText(anaekran.secilifirmaadi+" FÝRMASININ CARÝ HAREKETÝNÝ SÝL");
+		baslik.setText(anaekran.secilifirmaadi+" FÄ°RMASININ CARÄ° HAREKETÄ°NÄ° SÄ°L");
 	}
 	
 	yavru.setSize(640,450); 
@@ -129,14 +128,16 @@ public static void ekle() {
 	jt8.setHorizontalAlignment(SwingConstants.RIGHT);
 	yavru.add(jt8);
 	
-	jt8.addKeyListener(new java.awt.event.KeyAdapter() {    // tutar alanýna sadece double girme izni
+	jt8.addKeyListener(new java.awt.event.KeyAdapter() {    // kdv alanÄ±na sadece double girme izni
 
         public void keyReleased(java.awt.event.KeyEvent evt) {
             try {
          	
-            	@SuppressWarnings("unused")
 				double miktar = Double.parseDouble(jt8.getText());
-         						
+            	if (miktar-(miktar/1.18)<0) {
+		        jt6.setText("");
+                jt8.setText("");
+	            }
             } catch (Exception e) {
               
               jt8.setText("");
@@ -149,8 +150,9 @@ public static void ekle() {
 	jt6.setBounds(350,220,110,20);
 	jt6.setHorizontalAlignment(SwingConstants.RIGHT);
 	yavru.add(jt6);
+	jt6.setText("1");
 	
-	jt6.addKeyListener(new java.awt.event.KeyAdapter() {    // tutar alanýna sadece double girme izni
+	jt6.addKeyListener(new java.awt.event.KeyAdapter() {    // tutar alanÄ±na sadece double girme izni
 
         public void keyReleased(java.awt.event.KeyEvent evt) {
             try {
@@ -158,10 +160,15 @@ public static void ekle() {
             	df = new DecimalFormat("#0.00");
         	
             	double miktar = Double.parseDouble(jt6.getText());
-            
+                               	
 				jt8.setText((df.format(miktar-(miktar/1.18))));
 				String tencere= jt8.getText();
 				jt8.setText(virgulunoktayap (tencere));
+				
+				if (miktar<0 ) { 
+             	   jt6.setText("");
+                    jt8.setText("");
+                }
 				
             } catch (Exception e) {
               jt6.setText("");
@@ -171,12 +178,6 @@ public static void ekle() {
         }
     });
 
-	if (carihareketler.duzenlebasildi==true | carihareketler.silebasildi==true ) {
-		
-		veriarama(carihareketler.selectedData); 
-		
-			}
-		
 	lb4= new JLabel("Tarih        :");
 	lb4.setHorizontalAlignment(SwingConstants.RIGHT);
 	lb4.setBounds(-20,220,100,20);
@@ -187,7 +188,7 @@ public static void ekle() {
 	lb5.setBounds(-20,260,100,20);
 	yavru.add(lb5);
 	
-	lb7= new JLabel("Açýklama :");
+	lb7= new JLabel("AÃ§Ä±klama :");
 	lb7.setHorizontalAlignment(SwingConstants.RIGHT);
 	lb7.setBounds(240,260,100,20);
 	yavru.add(lb7);
@@ -202,10 +203,16 @@ public static void ekle() {
 	lb8.setBounds(440,220,60,20);
 	yavru.add(lb8);
 	
-	lb11= new JLabel("");                                // Bunu koymayýnca tablo kayýyor. Neden bilmiyorum. 
+	lb11= new JLabel("");                                // Bunu koymayÄ±nca tablo kayÄ±yor. Neden bilmiyorum. 
 	lb11.setBounds(1,1,1,1);
 	yavru.add(lb11);
 	
+if (carihareketler.duzenlebasildi==true | carihareketler.silebasildi==true ) {
+		
+		veriarama(carihareketler.selectedData); 
+		
+	}
+
 	if (carihareketler.silebasildi==true) {
 
 		jt5.setEditable(false);
@@ -245,7 +252,7 @@ public static void ekle() {
 			    }
 			
 		}
-		if (e.getActionCommand()==evethayir.sec.name()) {   // Borç alacak ve evrak türü seçiyoruz
+		if (e.getActionCommand()==evethayir.sec.name()) {   // BorÃ§ alacak ve evrak tÃ¼rÃ¼ seÃ§iyoruz
 			
 			data="";data2="";			 
 				
@@ -258,7 +265,14 @@ public static void ekle() {
 	            	 data2 = list2.getSelectedValue();
 	             }  
 	           
-	            	 label.setText("Fiþ Tipi    :    "+data2+" "+data); 
+	            	 label.setText("FiÅŸ Tipi    :    "+data2+" "+data); 
+	             if (data2.equals("ODEME")) {
+	            	 jt8.setVisible(false);
+	            	 lb8.setVisible(false);
+	            	 }else {
+	            		 jt8.setVisible(true);
+		            	 lb8.setVisible(true);	 
+	            	 }
 			}
 }
 
@@ -266,7 +280,6 @@ private void firmaverisil(String ekrankod) {
 	
 	sileyimmi.sonkarar("carihareket");
 	if (sileyimmi.cevap.equals("evet")) {
-	
 	
 		try {  
      
@@ -289,11 +302,10 @@ private void firmaverisil(String ekrankod) {
 	yavru.dispose();
 }
 
-
-
 private void firmaveridegistir(String ekrankod) {
 	
 	ekranioku();
+	
 	 Connection con = null;
      PreparedStatement ps = null;
      try {
@@ -373,7 +385,7 @@ private void ekranioku() {
 	ekranj7=jt7.getText().trim();
 	ekranj6=jt6.getText().trim();
 	if (ekranj6.equals("")) {
-		ekranj6="0";
+		ekranj6="1";
 	}
 	ekrantip=((data2.substring(0,3)+data.substring(0,4)).toLowerCase())+ekranj5;
 	ekranj8=jt8.getText().trim();
@@ -401,14 +413,18 @@ private static void veriarama(String ekrankod) {
 		     jt6.setText( rs.getString(6));
 		     jt7.setText( rs.getString(7));
 		     jt8.setText( rs.getString(8));
-		
-		     label.setText("Fiþ Tipi    :    "+carihareketler.sifrecoz(rs.getString(5).substring(0,7)));  
-	          
+		     
+		     String fistipi = carihareketler.sifrecoz(rs.getString(5).substring(0,7));
+		     label.setText("FiÅŸ Tipi    :    "+fistipi);  
+		     
+		     if (fistipi.equals("ODEME ALACAK") |  fistipi.equals("ODEME BORC")) {
+				 jt8.setVisible(false);
+				 lb8.setVisible(false);
+				 } 
 		}
 		con.close();  
 		
 		}catch(Exception e){ System.out.println(e);}  
-	
 }
 
 private static void degiskentemizle() {
@@ -433,7 +449,6 @@ private static String virgulunoktayap (String tencere) {
 	String tava=parca1+"."+parca2;
 	
 	return tava;
-	
 }
 
 }
