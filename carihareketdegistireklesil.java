@@ -55,13 +55,18 @@ public static void ekle() {
     picker.setVisible(true);
 	picker.setBounds(90,220,170,20);
 	yavru.add(picker);
+	    
+	label2=new JLabel("");
+	label2.setHorizontalAlignment(SwingConstants.RIGHT);
+	label2.setBounds(105,170,200,40);
+	yavru.add(label2);
 	
 	    label = new JLabel();              // 2 listeyi sergile
 	    label.setBounds(25,170,300,40);  
 	    
 	    data2="FATURA"; data="BORC";
 	    label.setText("Fiş Tipi    :    "+data2+" "+data); 
-	    
+	   	    
 	    b=new JButton("Seç");  
 	    b.setBounds(250,50,75,75);  
 	    b.addActionListener(new carihareketdegistireklesil());
@@ -207,6 +212,7 @@ public static void ekle() {
 	lb11.setBounds(1,1,1,1);
 	yavru.add(lb11);
 	
+	
 if (carihareketler.duzenlebasildi==true | carihareketler.silebasildi==true ) {
 		
 		veriarama(carihareketler.selectedData); 
@@ -273,6 +279,16 @@ if (carihareketler.duzenlebasildi==true | carihareketler.silebasildi==true ) {
 	            		 jt8.setVisible(true);
 		            	 lb8.setVisible(true);	 
 	            	 }
+	             if ((data2+" "+data).equals("ODEME BORC")) {
+	     	    	label2.setText("(YAPTIĞIMIZ ÖDEME)");
+	     	         }
+	     	    
+	     	     if ((data2+" "+data).equals("ODEME ALACAK")) {
+	     	    	label2.setText("(ALDIĞIMIZ ÖDEME)");
+	     	         }
+	     	    if (!data2.substring(0,5).equals("ODEME")) {
+	     	    	label2.setText("");
+	     	         }
 			}
 }
 
