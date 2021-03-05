@@ -1,4 +1,4 @@
-					// excel'e çýktý alma
+					// excel'e Ã§Ã½ktÃ½ alma
 package alverdef;
 
 import java.awt.BorderLayout;
@@ -49,7 +49,7 @@ public class faturalistesi{
 		tariharasi="";
 		nelistesi="";
 		
-		yavru = new JDialog(anaekran.frame," Tarih Aralýðý Seçimi",true); 
+		yavru = new JDialog(anaekran.frame," Tarih AralÃ½Ã°Ã½ SeÃ§imi",true); 
 		yavru.setResizable(true);
 		yavru.setBounds(450,300, 250, 150);
 		
@@ -57,7 +57,7 @@ public class faturalistesi{
 		panel2=new JPanel();
 		panel3=new JPanel();
 		
-		JCheckBox kutucuk = new JCheckBox("Tüm Kayýtlarý Listele");
+		JCheckBox kutucuk = new JCheckBox("TÃ¼m KayÃ½tlarÃ½ Listele");
 		kutucuk.addActionListener(new ActionListener(){  
 		    public void actionPerformed(ActionEvent e){  
 		    	if (hepsini==true) {
@@ -70,13 +70,13 @@ public class faturalistesi{
 		    }  
 		});  
 		
-		picker = new JXDatePicker();                        //Tarih Seçici 1
+		picker = new JXDatePicker();                        //Tarih SeÃ§ici 1
 	    picker.setDate(Calendar.getInstance().getTime()); 	
 	    picker.setFormats(new SimpleDateFormat("yyyy.MM.dd"));
 	    picker.setVisible(true);
 		panel.add(picker);
 		
-		picker2 = new JXDatePicker();                        //Tarih Seçici 2 
+		picker2 = new JXDatePicker();                        //Tarih SeÃ§ici 2 
 	    picker2.setDate(Calendar.getInstance().getTime()); 
 		picker2.setFormats(new SimpleDateFormat("yyyy.MM.dd"));
 	    picker2.setVisible(true);
@@ -130,7 +130,7 @@ public class faturalistesi{
 		    komut="select * from fiskayitlari where firmalarim_0kod='"+anaekran.varsayilansirketkodu+nelistesi+tariharasi;
 		
 			
-			try{                                              // MYSQL Veri tabanýnýn kaç satýr olduðunu bulup array boyutlama
+			try{                                              // MYSQL Veri tabanÃ½nÃ½n kaÃ§ satÃ½r olduÃ°unu bulup array boyutlama
 				Class.forName("com.mysql.jdbc.Driver");  
 				Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -149,7 +149,7 @@ public class faturalistesi{
 			
 			 cnk=0;
 			
-			try{                                              //Veri tabanýndakileri array'e aktarma
+			try{                                              //Veri tabanÃ½ndakileri array'e aktarma
 				Class.forName("com.mysql.jdbc.Driver");  
 				Connection con=DriverManager.getConnection(  
 						"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -164,8 +164,10 @@ public class faturalistesi{
 					satir[cnk][2] = carihareketler.sifrecoz(rs.getString(5).substring(0,7));  //tip 
 					satir[cnk][3] = rs.getString(6);  // tutar
 					satir[cnk][4] = rs.getString(5).substring(7);  // Evrak no
-					satir[cnk][5] = rs.getString(8);  // kdv tutarý
-												 
+					satir[cnk][5] = rs.getString(8);  // kdv tutarÃ½
+					if (satir[cnk][2].substring(0, 6).equals("DEKONT")) {
+						satir[cnk][5]="0";
+					}							 
 				 cnk++;
 				}
 				 con.close();  
@@ -174,7 +176,7 @@ public class faturalistesi{
 	  
 		
 				for (int i=0 ; i<cnk ; i++)    {
-					try{                                              //cari kod hangi firma adýna denk geliyor cari kartlarý tablaosunda bak ve array i deðiþtir.
+					try{                                              //cari kod hangi firma adÃ½na denk geliyor cari kartlarÃ½ tablaosunda bak ve array i deÃ°iÃ¾tir.
 						Class.forName("com.mysql.jdbc.Driver");  
 						Connection con=DriverManager.getConnection(  
 								"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -195,7 +197,7 @@ public class faturalistesi{
 			
     	JFrame parentFrame = new JFrame();
     	 
-    	JFileChooser fileChooser = new JFileChooser();                    // kaydedilecek excel dosyasýnýn ismini seçme 
+    	JFileChooser fileChooser = new JFileChooser();                    // kaydedilecek excel dosyasÃ½nÃ½n ismini seÃ§me 
     	fileChooser.setDialogTitle("Specify a file to save");   
     	 
     	int userSelection = fileChooser.showSaveDialog(parentFrame);
@@ -205,7 +207,7 @@ public class faturalistesi{
     	  
     	     }
     	    
-    	try {                                                              //excel oluþtur
+    	try {                                                              //excel oluÃ¾tur
     		
     		String kayit=fileToSave+".xls";
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -216,23 +218,23 @@ public class faturalistesi{
            
             rowhead = sheet.createRow(2);
             if (hepsini==false) {
-            rowhead.createCell(0).setCellValue(tarih1+" VE "+tarih2+ " TARÝHLERÝ ARASI" );
+            rowhead.createCell(0).setCellValue(tarih1+" VE "+tarih2+ " TARÃHLERÃ ARASI" );
             }
             
             rowhead = sheet.createRow(3);
             
             if (liste.equals("alacak")) {
-            rowhead.createCell(0).setCellValue("SATICI FATURALARI ( FATURA ALACAK VE DEKONT ALACAK) LÝSTESÝ");
+            rowhead.createCell(0).setCellValue("SATICI FATURALARI ( FATURA ALACAK VE DEKONT ALACAK) LÃSTESÃ");
             }
             
             if (liste.equals("borc")) {
-                rowhead.createCell(0).setCellValue("ALICI FATURALARI ( FATURA BORÇ VE DEKONT BORÇ) LÝSTESÝ");
+                rowhead.createCell(0).setCellValue("ALICI FATURALARI ( FATURA BORÃ‡ VE DEKONT BORÃ‡) LÃSTESÃ");
                 }
             
             rowhead = sheet.createRow(5);
-            rowhead.createCell(1).setCellValue("TARÝH:");
-            rowhead.createCell(2).setCellValue("ÜNVAN");
-            rowhead.createCell(3).setCellValue("TÜR");
+            rowhead.createCell(1).setCellValue("TARÃH:");
+            rowhead.createCell(2).setCellValue("ÃœNVAN");
+            rowhead.createCell(3).setCellValue("TÃœR");
             rowhead.createCell(4).setCellValue("MATRAH");  
             rowhead.createCell(5).setCellValue("KDV % ");
             rowhead.createCell(6).setCellValue("KDV");  
