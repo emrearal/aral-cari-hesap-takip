@@ -43,7 +43,7 @@ public class anaekran implements ActionListener {
 	static JLabel baslik2;
 	static String selectedData ="",aranankelime="",varsayilansirketadi="",secilifirmaadi="",secilifirmalimit="";
 	
-	static String sqluser="root",sqlpass="123456",sqlip="localhost:3306";         // Emre Laptop sql localhost
+	static String sqluser="root",sqlpass="123456",sqlip="localhost:3306";       
 	
 	static boolean eklebasildi=false,silebasildi=false,duzenlebasildi=false,gosterbasildi=false;
 	static int varsayilansirketkodu;
@@ -150,11 +150,11 @@ public class anaekran implements ActionListener {
        menubar.add(firmalar);
        menubar.add(raporlar);
        menubar.add(araclar);
-       //menubar.add(yedek);   
+       menubar.add(yedek);   
        menubar.add(yardim);
      
        firmalar.add(firmahesaplari);
-       //yedek.add(yedekal);  uzak sql sunucuda çalismaz.
+       yedek.add(yedekal);   // uzak sql sunucuda çalismaz.
        //yedek.add(geriyukle); şimdilik yedek geri yüklemeyi kullanmıyoruz.
        araclar.add(notdefteri);
        araclar.add(hesapmakinesi);
