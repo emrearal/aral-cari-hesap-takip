@@ -219,6 +219,7 @@ public class anaekran implements ActionListener {
 						}catch(Exception e){ System.out.println(e);}  
 				
 				tablo= new JTable(satir,sutun);  
+		                tablo.setDefaultEditor(Object.class, null);	// tabloya elle düzeltme yapılamasın
 				sp=new JScrollPane(tablo); 
 				sp.setPreferredSize(new Dimension(700, 350));
 				
