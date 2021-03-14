@@ -98,7 +98,7 @@ public class anaekran implements ActionListener {
 		frame = new JFrame();
 		frame.setTitle("ARAL CARİ HESAP TAKİP PROGRAMI.     Varsayılan Şirketim :  "+varsayilansirketadi );
 		
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
 		menubar = new JMenuBar();                                 // Menü oluşturma
