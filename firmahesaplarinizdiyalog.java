@@ -43,10 +43,10 @@ public class firmahesaplarinizdiyalog implements ActionListener {
 		buttonduzenle = new JButton("      Duzenle     ");
 		buttonsil= new JButton("         Sil            ");
 		buttonkapat= new JButton("X (KAPAT)");
-		buttonvarsayilan = new JButton("Varsayılan Yap");
-		frame = new JFrame("Şirketlerim");
+		buttonvarsayilan = new JButton("VarsayÃ½lan Yap");
+		frame = new JFrame("Ãirketlerim");
 				
-		baslik2 = new JLabel(" İşlem Yapılacak Şirketinizi Seçin veya Yenisini Ekleyin" );
+		baslik2 = new JLabel(" ÃÃ¾lem YapÃ½lacak Ãirketinizi SeÃ§in veya Yenisini Ekleyin" );
 	
 		frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		frame.setUndecorated(true);
@@ -72,10 +72,10 @@ public class firmahesaplarinizdiyalog implements ActionListener {
 		buttonvarsayilan.addActionListener(new firmahesaplarinizdiyalog());
 		buttonvarsayilan.setActionCommand(evethayir.buttonvarsayilan.name());
 		
-		String[] sutun = { "KOD","Şirketimin Ünvanı","Varsayılan"} ;                      // Tablo oluşturma 
+		String[] sutun = { "KOD","Ãirketimin ÃœnvanÃ½","VarsayÃ½lan"} ;                      // Tablo oluÃ¾turma 
 		int cnk=0;
 	
-		try{                                              // MYSQL Veri tabanının kaç satır olduğunu bulup array boyutlama
+		try{                                              // MYSQL Veri tabanÃ½nÃ½n kaÃ§ satÃ½r olduÃ°unu bulup array boyutlama
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -91,7 +91,7 @@ public class firmahesaplarinizdiyalog implements ActionListener {
 		 String[][] satir= new String[cnk][3];
 		 cnk=0;
 		
-		try{                                              //Veri tabanındakileri array'e aktarma
+		try{                                              //Veri tabanÃ½ndakileri array'e aktarma
 			Class.forName("com.mysql.jdbc.Driver");  
 			Connection con=DriverManager.getConnection(  
 					"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
@@ -113,7 +113,8 @@ public class firmahesaplarinizdiyalog implements ActionListener {
 		panel4=new JPanel();
 		
 		
-		tablo= new JTable(satir,sutun);   
+		tablo= new JTable(satir,sutun); 
+		tablo.setDefaultEditor(Object.class, null);	// tabloya elle dÃ¼zeltme yapÄ±lamasÄ±n
 		sp=new JScrollPane(tablo); 
 		sp.setPreferredSize(new Dimension(500,100));
 		
@@ -148,13 +149,13 @@ public class firmahesaplarinizdiyalog implements ActionListener {
         frame.setLocation(500,90);
         frame.setVisible(true);
 	    
-        ListSelectionModel cellSelectionModel = tablo.getSelectionModel();               // listeden seçileni dinleme kısmı
+        ListSelectionModel cellSelectionModel = tablo.getSelectionModel();               // listeden seÃ§ileni dinleme kÃ½smÃ½
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
           public void valueChanged(ListSelectionEvent e) {
            
-        	  if(!e.getValueIsAdjusting())  {    						// bu IF iki defa yazmaması için konuldu. 
+        	  if(!e.getValueIsAdjusting())  {    						// bu IF iki defa yazmamasÃ½ iÃ§in konuldu. 
       
         		  int selectedRow     = tablo.getSelectedRow();
           		selectedData = (String) tablo.getValueAt(selectedRow,0 );
