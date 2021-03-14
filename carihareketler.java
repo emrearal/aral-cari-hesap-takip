@@ -141,7 +141,8 @@ public class carihareketler implements ActionListener {
 			 cnk=0;
 			}catch(Exception e){ System.out.println(e);}  
 	        
-	    tablo= new JTable(satir,sutun);   
+	    tablo= new JTable(satir,sutun); 
+		tablo.setDefaultEditor(Object.class, null);	// tabloya elle düzeltme yapılamasın
 		sp=new JScrollPane(tablo); 
 		sp.setPreferredSize(new Dimension(1000, 350));
 		
