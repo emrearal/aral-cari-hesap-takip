@@ -150,11 +150,11 @@ public class anaekran implements ActionListener {
        menubar.add(firmalar);
        menubar.add(raporlar);
        menubar.add(araclar);
-       menubar.add(yedek);   
+       //menubar.add(yedek);   
        menubar.add(yardim);
      
        firmalar.add(firmahesaplari);
-       yedek.add(yedekal);
+       //yedek.add(yedekal);  uzak sql sunucuda çalismaz.
        //yedek.add(geriyukle); şimdilik yedek geri yüklemeyi kullanmıyoruz.
        araclar.add(notdefteri);
        araclar.add(hesapmakinesi);
