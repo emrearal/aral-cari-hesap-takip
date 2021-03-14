@@ -72,7 +72,8 @@ public class notdefteripenceresi implements ActionListener {
 	     PreparedStatement ps = null;
 	     String ekranj1=area.getText();
 	     try {
-	        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alverdefdb?useUnicode=true&characterEncoding=UTF-8","emrearal", "123456"); 
+	        con = DriverManager.getConnection(
+			"jdbc:mysql://"+anaekran.sqlip+"/alverdefdb?useUnicode=true&characterEncoding=UTF-8",anaekran.sqluser,anaekran.sqlpass);
 	        ps = con.prepareStatement("update notdefteri set notlarim=?;");
 	        ps.setString(1,ekranj1);
 	        ps.executeUpdate();
