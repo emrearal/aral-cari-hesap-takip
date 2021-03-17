@@ -17,9 +17,8 @@ public class hesapmakinesi implements ActionListener {
 	static JButton button1,button2,button3,button4,button5,button6,button7,button8,button9,button0;
 	static JButton buttonplus,buttonminus,buttondiv,buttonmult,buttonequ,buttonclr,buttonpoint;
 	static JTextField text1;
-	static String d1="",d2="",operator="",eskioperator="" ,disp; 
+	static String d1="",d2="",operator="",eskioperator="+" ,disp; 
 	static double a1=0,a2=0;
-	
 	
 	public static void torpule() {
 		if (disp.length()>2) {
@@ -31,7 +30,6 @@ public class hesapmakinesi implements ActionListener {
 		}
 		
 		int noktapoz= disp.indexOf(".");
-		
 		
 		if (noktapoz!=-1) {
 			String noktasonrasi=disp.substring(noktapoz, disp.length());
@@ -61,9 +59,10 @@ public class hesapmakinesi implements ActionListener {
 		
 		double sonuc=0;
 		disp ="";
-				
+		esittir();
+		eskioperator=operator;
+		
 		if (operator.equals("+")) {
-			
 			disp = text1.getText();
 			a2 = Double.valueOf(disp);
 			sonuc= a1+a2;
@@ -76,8 +75,7 @@ public class hesapmakinesi implements ActionListener {
 				}
 			if (a1==0) {
 				a1=1;
-				
-			}
+				}
 			disp = text1.getText();
 			a2 = Double.valueOf(disp);
 			sonuc= a1*a2;
@@ -127,13 +125,18 @@ public class hesapmakinesi implements ActionListener {
 	
 	public static void esittir() {
 		
+		if(eskioperator.equals("+") && operator.equals("") && a1==0 && a2==00) {
+			return;
+		}
+		
+		
 		double sonuc = 0;
 		disp = text1.getText();
 		a2 = Double.valueOf(disp);
-		if (operator.equals("+")) {
+		if (eskioperator.equals("+")) {
 		sonuc= a1+a2;
 		}
-		if (operator.equals("x")) {
+		if (eskioperator.equals("x")) {
 			if (a2==0) {
 				a2=1 ;
 				}
@@ -145,11 +148,11 @@ public class hesapmakinesi implements ActionListener {
 			sonuc= a1*a2;
 			}
 		
-		if (operator.equals("eksi")) {
+		if (eskioperator.equals("eksi")) {
 			sonuc= a1-a2;
 				
 			}
-		if (operator.equals("/")) {
+		if (eskioperator.equals("/")) {
 			
 			if (a1==0) {
 				a1=1;
@@ -185,7 +188,7 @@ public class hesapmakinesi implements ActionListener {
 	  }
 	
 	public static void hesapmak() {
-		frame=new JFrame("HESAP MAKÝNESÝ");
+		frame=new JFrame("HESAP MAKÄ°NESÄ°");
 		frame.setResizable(false);
 		panel=new JPanel();
 		button1 = new JButton("1");
@@ -206,9 +209,9 @@ public class hesapmakinesi implements ActionListener {
 		buttonclr = new JButton("CLR");
 		buttonpoint = new JButton(".");
 		
-		
-		text1 = new JTextField ();
+		text1 = new JTextField ("0");
 		text1.setHorizontalAlignment(SwingConstants.RIGHT);
+		text1.setEditable(false);
 		
 		text1.setFont(new Font("Serif", Font.PLAIN, 30));
 			
@@ -283,7 +286,6 @@ public class hesapmakinesi implements ActionListener {
 		frame.setSize(295,410);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		panel.setLayout(null);
-		
 		
 		text1.setBounds(20, 13, 240, 40);
 		button7.setBounds(20,70,50,50);
@@ -385,7 +387,6 @@ public class hesapmakinesi implements ActionListener {
 		
 		if (e.getActionCommand()==actions.nokta.name()) {
 			
-			
 			disp = text1.getText();
 			int y =disp.indexOf(".");
 			if  (y==-1)  {
@@ -398,37 +399,31 @@ public class hesapmakinesi implements ActionListener {
 		
 		if (e.getActionCommand()==actions.esit.name()) {
 			
-			
 			esittir();
-			
 		}
 		
 		if (e.getActionCommand()==actions.arti.name()) {
 			
 			  operator="+";
 			  operbas();
-				
 		}
 		
 		if (e.getActionCommand()==actions.bolu.name()) {
 			
 			  operator="/";
 			  operbas();
-				
 		}
 		
 		if (e.getActionCommand()==actions.eksi.name()) {
 			
 			  operator="eksi";
 			  operbas();
-				
 		}
 		
 		if (e.getActionCommand()==actions.carpi.name()) {
 			
 			  operator="x";
 			  operbas();
-				
 		}
 		
 		if (e.getActionCommand()==actions.clr.name()) {
@@ -439,8 +434,8 @@ public class hesapmakinesi implements ActionListener {
 			d1="";
 			d2="";
 			operator="";
-			  
-}
+			eskioperator="+";
+	}
 }
 		
 }
