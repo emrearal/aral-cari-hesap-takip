@@ -1,11 +1,11 @@
 package alverdef;
 
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -19,30 +19,27 @@ public class hesapmakinesi implements ActionListener {
 	static JTextField text1;
 	static String d1="",d2="",operator="",eskioperator="+" ,disp; 
 	static double a1=0,a2=0;
+	static JLabel oprbilgisi;
 	
-	public static void torpule() {
+	public static void torpule() {   // ekranda '.0" gözüküyorsa o kısmı sil. 
 		if (disp.length()>2) {
 			String numune = disp.substring(disp.length()-2);
 			     if (numune.equals(".0")) { 
 			    	 disp=disp.substring(0,disp.length()-2);
 			     }
-		
 		}
-		
 		int noktapoz= disp.indexOf(".");
 		
-		if (noktapoz!=-1) {
+		if (noktapoz!=-1) {   // nokta varsa...
 			String noktasonrasi=disp.substring(noktapoz, disp.length());
 			
 			int noktasonrasikacbas= noktasonrasi.length();
 			
-			if (noktasonrasikacbas>4) {
-				disp=disp.substring(0,noktapoz+4);
+			if (noktasonrasikacbas>5) {
+				disp=disp.substring(0,noktapoz+5);
 			}
-			
 		}
 	}
-	
 	public static void rakambas() {
 		
 			disp = text1.getText();
@@ -54,8 +51,13 @@ public class hesapmakinesi implements ActionListener {
 			d2="";
 			
 			}
-		
 	public static void operbas() {
+		
+		if (operator.equals("eksi")) {
+			oprbilgisi.setText("-");
+			}else {
+				oprbilgisi.setText(operator);
+			}
 		
 		double sonuc=0;
 		disp ="";
@@ -64,11 +66,10 @@ public class hesapmakinesi implements ActionListener {
 		
 		if (operator.equals("+")) {
 			disp = text1.getText();
-			a2 = Double.valueOf(disp);
+			a2 = Double.parseDouble(disp);      
 			sonuc= a1+a2;
-					
 		}
-					
+
 		if (operator.equals("x")) {
 			if (a2==0) {
 				a2=1 ;
@@ -79,7 +80,6 @@ public class hesapmakinesi implements ActionListener {
 			disp = text1.getText();
 			a2 = Double.valueOf(disp);
 			sonuc= a1*a2;
-			
 		}
 		
 		if (operator.equals("eksi")) {
@@ -87,7 +87,6 @@ public class hesapmakinesi implements ActionListener {
 			disp = text1.getText();
 			a2 = Double.valueOf(disp);
 			sonuc= a2-a1;
-			
 		}
 		
 		if (operator.equals("/")) {
@@ -106,21 +105,16 @@ public class hesapmakinesi implements ActionListener {
 			disp = text1.getText();
 			a2 = Double.valueOf(disp);
 			sonuc= a1/a2;
-			
 			}			
 			
 		}
 	     
 		disp=Double.toString(sonuc);
-		
 		torpule();
-		
 		text1.setText(disp);
 		eskioperator=operator;
-		
 		a1=sonuc;
 		d1="";	
-		
 	}
 	
 	public static void esittir() {
@@ -128,8 +122,6 @@ public class hesapmakinesi implements ActionListener {
 		if(eskioperator.equals("+") && operator.equals("") && a1==0 && a2==00) {
 			return;
 		}
-		
-		
 		double sonuc = 0;
 		disp = text1.getText();
 		a2 = Double.valueOf(disp);
@@ -142,9 +134,7 @@ public class hesapmakinesi implements ActionListener {
 				}
 			if (a1==0) {
 				a1=1;
-				
 			}
-			
 			sonuc= a1*a2;
 			}
 		
@@ -188,8 +178,10 @@ public class hesapmakinesi implements ActionListener {
 	  }
 	
 	public static void hesapmak() {
+		
 		frame=new JFrame("HESAP MAKİNESİ");
 		frame.setResizable(false);
+		frame.setLocation(500,200);
 		panel=new JPanel();
 		button1 = new JButton("1");
 		button2 = new JButton("2");
@@ -213,6 +205,10 @@ public class hesapmakinesi implements ActionListener {
 		text1.setHorizontalAlignment(SwingConstants.RIGHT);
 		text1.setEditable(false);
 		
+		oprbilgisi=new JLabel("");
+		oprbilgisi.setFont (new Font("Serif", Font.PLAIN, 18));
+		oprbilgisi.setBounds(244, 1, 20,20);
+				
 		text1.setFont(new Font("Serif", Font.PLAIN, 30));
 			
 		buttondiv.setFont (new Font("Serif", Font.PLAIN, 25));
@@ -287,7 +283,7 @@ public class hesapmakinesi implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		panel.setLayout(null);
 		
-		text1.setBounds(20, 13, 240, 40);
+		text1.setBounds(20, 20, 240, 40);
 		button7.setBounds(20,70,50,50);
 		button8.setBounds(80,70,50,50);
 		button9.setBounds(140,70,50,50);
@@ -327,7 +323,8 @@ public class hesapmakinesi implements ActionListener {
 		panel.add(buttonequ);
 		panel.add(buttonpoint);
 		panel.add(text1);
-				
+		panel.add(oprbilgisi);
+		
 		frame.setVisible(true);
 
 	}
@@ -392,13 +389,11 @@ public class hesapmakinesi implements ActionListener {
 			if  (y==-1)  {
 				text1.setText(".");
 				rakambas ();
-				
 		                }
-		
 	    }
 		
 		if (e.getActionCommand()==actions.esit.name()) {
-			
+			oprbilgisi.setText("");
 			esittir();
 		}
 		
@@ -435,6 +430,7 @@ public class hesapmakinesi implements ActionListener {
 			d2="";
 			operator="";
 			eskioperator="+";
+			oprbilgisi.setText("");
 	}
 }
 		
